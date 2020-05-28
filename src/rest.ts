@@ -35,6 +35,9 @@ export const createClient = (options: Partial<RestClientOptions>) => {
     try {
       const json = await api(path, {
         method,
+        headers: {
+          'x-token': '',
+        },
         ...(fields ? { json: fields } : {}),
       }).json();
 
