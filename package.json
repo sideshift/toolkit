@@ -1,6 +1,6 @@
 {
   "name": "@sideshift/toolkit",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "description": "Functions for orders, deposits, rates, and webhooks",
   "repository": {
     "type": "git",
