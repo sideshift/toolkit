@@ -31,11 +31,29 @@ export const createClient = (options: Partial<RestClientOptions>) => {
     method: string,
     path: string,
     fields?: unknown,
-  ): Promise<T> =>
-    api(path, {
-      method,
-      ...(fields ? { json: fields } : {}),
-    }).json<T>();
+  ): Promise<T> => {
+    try {
+      const json = await api(path, {
+        method,
+        ...(fields ? { json: fields } : {}),
+      }).json();
+
+      return json as T;
+    } catch (error) {
+      if (error.response) {
+        const json = await error.response?.json();
+
+        const message =
+          json?.error?.message ||
+          (json && JSON.stringify(json)) ||
+          error.message;
+
+        throw new Error(`HTTP ${error.response.status}: ${message}`);
+      }
+
+      throw error;
+    }
+  };
 
   const getPair = (depositMethodId: string, settleMethodId: string) =>
     request<restTypes.GetPairResponse>(
