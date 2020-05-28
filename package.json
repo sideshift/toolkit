@@ -19,7 +19,7 @@
   "author": "SideShift.ai <hello@sideshift.ai>",
   "license": "MIT",
   "files": [
-    "/dist/*.{d.ts,js,js.map}"
+    "/dist/**/*.{d.ts,js,js.map}"
   ],
   "keywords": [
     "sideshift",
