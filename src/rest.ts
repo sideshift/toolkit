@@ -36,7 +36,7 @@ export const createClient = (options: Partial<RestClientOptions>) => {
       const json = await api(path, {
         method,
         headers: {
-          'x-token': '',
+          cookie: 'country-override=XX',
         },
         ...(fields ? { json: fields } : {}),
       }).json();
