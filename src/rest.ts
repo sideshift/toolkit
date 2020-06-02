@@ -4,7 +4,13 @@ import * as restTypes from './types/rest';
 const DEFAULT_BASE_URL = 'https://sideshift.ai/api/';
 
 export type RestClientOptions = {
+  /**
+   * Base url for the API. Defaults to https://sideshift.ai/api/
+   */
   baseUrl: string;
+  /**
+   * SideShift.ai secret. Obtain from visiting https://sideshift.ai/affiliate and clicking SHOW AFFILIATE SECRET.
+   */
   secret?: string;
 };
 
