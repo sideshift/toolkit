@@ -64,6 +64,11 @@ export const createClient = (options: Partial<RestClientOptions>) => {
     }
   };
 
+  /**
+   * Retrieve information about the specified shift pair
+   * @param depositMethodId The deposit method
+   * @param settleMethodId The settle method
+   */
   const getPair = (depositMethodId: string, settleMethodId: string) =>
     request<restTypes.GetPairResponse>(
       'GET',
@@ -72,13 +77,44 @@ export const createClient = (options: Partial<RestClientOptions>) => {
 
   const getFacts = () => request<restTypes.GetFactsResponse>('GET', `facts`);
 
+  /**
+   * Retrieve a list of assets, such as `BTC` and `XMR`. Shortcut for `getFacts`.
+   */
+  const getAssets = () => getFacts().then((facts) => facts.assets);
+
+  /**
+   * Retrieve a list of deposit methods, such as `ln` or `bch`. Shortcut for `getFacts`
+   */
+  const getDepositMethods = () =>
+    getFacts().then((facts) => facts.depositMethods);
+
+  /**
+   * Retrieve a list of settle methods, such as `xmr` or `bch`. Shortcut for `getFacts`
+   */
+  const getSettleMethods = () =>
+    getFacts().then((facts) => facts.settleMethods);
+
+  /**
+   * Create an order
+   */
   const createOrder = (fields: restTypes.CreateOrderInput) =>
     request<restTypes.CreateOrderResponse>('POST', `orders`, fields);
+
+  /**
+   * Fetch an order by its id
+   * @param id Order id
+   */
+  const getOrder = (id: string) =>
+    request<restTypes.GetOrderResponse>('GET', `orders/${id}`);
 
   return {
     request,
     getPair,
     getFacts,
     createOrder,
+    getAssets,
+    getDepositMethods,
+    getSettleMethods,
+    getOrder,
   };
 };
