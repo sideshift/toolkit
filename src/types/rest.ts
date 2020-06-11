@@ -1,59 +1,9 @@
 import * as t from 'io-ts';
-import { SendReceipt, PaymentDestination } from './core';
+import { Deposit, Order, DepositMethod, SettleMethod } from './entities';
 
-export type GetDepositResponse = {
-  id: string;
-  /**
-   * @deprecated Use id
-   */
-  depositId: string;
-  /**
-   * @deprecated Use createdAtISO
-   */
-  createdAt: string;
-  createdAtISO: string;
-  depositAmount: string;
-  settleRate?: string;
-  settleAmount?: string;
-  networkFeeAmount?: string;
-  status: string;
-  settleTx?: SendReceipt;
-  refundAddress?: PaymentDestination;
-  refundTx?: SendReceipt;
-  reason?: string;
-  /**
-   * @deprecated Use orderId
-   */
-  quoteId: string;
-  orderId: string;
-};
+export type GetDepositResponse = Deposit;
 
-export type GetOrderResponse = {
-  id: string;
-  /**
-   * @deprecated Use id
-   */
-  orderId: string;
-  /**
-   * @deprecated Use id
-   */
-  quoteId: string;
-  /**
-   * @deprecated Use createdAtISO
-   */
-  createdAt: string;
-  createdAtISO: string;
-  /**
-   * @deprecated Use expiresAtISO
-   */
-  expiresAt: string | undefined;
-  expiresAtISO: string | undefined;
-  depositAddress: PaymentDestination;
-  settleAddress: PaymentDestination;
-  depositMethodId: string;
-  settleMethodId: string;
-  depositMin?: string;
-  depositMax?: string;
+export type GetOrderResponse = Order & {
   deposits: Omit<GetDepositResponse, 'orderId' | 'quoteId'>[];
 };
 
@@ -89,26 +39,16 @@ export type CreateOrderInput = Pick<
 
 export type GetFactsResponse = {
   assets: {
-    [assetId in string]: {
+    [assetId: string]: {
       id: string;
       name: string;
     };
   };
   depositMethods: {
-    [depositMethodId in string]: {
-      displayName: string;
-      asset: string;
-      invoice?: boolean;
-      invoiceRequiresAmount?: boolean;
-      enabled: boolean;
-    };
+    [depositMethodId: string]: DepositMethod;
   };
   settleMethods: {
-    [depositMethodId in string]: {
-      displayName: string;
-      asset: string;
-      enabled: boolean;
-    };
+    [settleMethodId: string]: SettleMethod;
   };
 };
 
