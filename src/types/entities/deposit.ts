@@ -25,4 +25,8 @@ export type Deposit = {
    */
   quoteId: string;
   orderId: string;
+  /**
+   * The deposit transaction of the shift. The receipt type varies by the order's `depositMethodId`.
+   */
+  depositTx: SendReceipt;
 };
