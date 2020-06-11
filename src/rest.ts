@@ -118,3 +118,5 @@ export const createClient = (options: Partial<RestClientOptions>) => {
     getOrder,
   };
 };
+
+export type RestClient = ReturnType<typeof createClient>;
