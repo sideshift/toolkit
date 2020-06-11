@@ -43,6 +43,11 @@ export type GetOrderResponse = {
    */
   createdAt: string;
   createdAtISO: string;
+  /**
+   * @deprecated Use expiresAtISO
+   */
+  expiresAt: string | undefined;
+  expiresAtISO: string | undefined;
   depositAddress: PaymentDestination;
   settleAddress: PaymentDestination;
   depositMethodId: string;
