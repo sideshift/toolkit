@@ -21,8 +21,8 @@
   "license": "MIT",
   "files": [
     "/*.{d.ts,js,js.map}",
-    "/hooks/*.{d.ts,js,js.map}",
-    "/types/*.{d.ts,js,js.map}"
+    "/hooks/**/*.{d.ts,js,js.map}",
+    "/types/**/*.{d.ts,js,js.map}"
   ],
   "keywords": [
     "sideshift",
