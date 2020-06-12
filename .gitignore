@@ -40,6 +40,14 @@ jspm_packages
 
 .DS_Store
 
-/dist
+/build
 
 .env
+
+# Build output
+/hooks
+/types
+/*.d.ts
+/*.map
+/index.js
+/rest.js

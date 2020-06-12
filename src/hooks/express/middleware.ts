@@ -8,8 +8,8 @@ import {
   DepositUpdateHookDelivery,
   PingHookDelivery,
   HookEventType,
-} from '../types';
-import { verifyDeliverySignature } from './signing';
+} from '../../types/hooks';
+import { verifyDeliverySignature } from '../signing';
 
 export type CreateHooksMiddlewareOptions = {
   /**
