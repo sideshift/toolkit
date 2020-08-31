@@ -7,10 +7,6 @@ export type Order = {
    */
   orderId: string;
   /**
-   * @deprecated Use id
-   */
-  quoteId: string;
-  /**
    * @deprecated Use createdAtISO
    */
   createdAt: string;

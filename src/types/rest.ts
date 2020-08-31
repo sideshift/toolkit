@@ -4,7 +4,7 @@ import { Deposit, Order, DepositMethod, SettleMethod } from './entities';
 export type GetDepositResponse = Deposit;
 
 export type GetOrderResponse = Order & {
-  deposits: Omit<GetDepositResponse, 'orderId' | 'quoteId'>[];
+  deposits: Omit<GetDepositResponse, 'orderId'>[];
 };
 
 export type CreateOrderResponse = GetOrderResponse;
