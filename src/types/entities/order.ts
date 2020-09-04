@@ -22,4 +22,17 @@ export type Order = {
   settleMethodId: string;
   depositMin?: string;
   depositMax?: string;
+  /**
+   * The identifier of the quote the shift is based on if the shift
+   * type is fixed.
+   */
+  quoteId: string | undefined;
+  /**
+   * The amount that must be deposited if the shift type is fixed.
+   */
+  depositAmount: string | undefined;
+  /**
+   * The amount that will be settled if the shift type is fixed.
+   */
+  settleAmount: string | undefined;
 };

@@ -1,7 +1,9 @@
 import * as t from 'io-ts';
-import { Deposit, Order, DepositMethod, SettleMethod } from './entities';
+import { Deposit, Order, DepositMethod, SettleMethod, Quote } from './entities';
 
 export type GetDepositResponse = Deposit;
+
+export type GetQuoteResponse = Quote;
 
 export type GetOrderResponse = Order & {
   deposits: Omit<GetDepositResponse, 'orderId'>[];
@@ -9,10 +11,19 @@ export type GetOrderResponse = Order & {
 
 export type CreateOrderResponse = GetOrderResponse;
 
+export type RequestQuoteResponse = GetQuoteResponse;
+
 export const createOrderInputDecoder = t.type({
-  depositMethodId: t.string,
-  settleMethodId: t.string,
+  depositMethodId: t.union([t.string, t.undefined, t.null]),
+  settleMethodId: t.union([t.string, t.undefined, t.null]),
   settleAddress: t.string,
+  /**
+   * @deprecated Create a quote and supply `quoteId`
+   */
+  depositAmount: t.union([t.string, t.undefined, t.null]),
+  /**
+   * @deprecated Create a quote and supply `quoteId`
+   */
   amount: t.union([t.string, t.undefined, t.null]),
   affiliateId: t.union([t.string, t.undefined, t.null]),
   refundAddress: t.union([t.string, t.undefined, t.null]),
@@ -23,7 +34,10 @@ export const createOrderInputDecoder = t.type({
     t.undefined,
     t.null,
   ]),
-  settleAmount: t.union([t.string, t.undefined, t.null]),
+  /**
+   * The id of the quote to base this order on
+   */
+  quoteId: t.union([t.string, t.undefined, t.null]),
 });
 
 export type CreateOrderInput = Pick<
@@ -36,6 +50,15 @@ export type CreateOrderInput = Pick<
       'depositMethodId' | 'settleAddress' | 'settleMethodId'
     >
   >;
+
+export const createQuoteInputDecoder = t.type({
+  depositMethod: t.string,
+  settleMethod: t.string,
+  depositAmount: t.union([t.string, t.undefined, t.null]),
+  settleAmount: t.union([t.string, t.undefined, t.null]),
+});
+
+export type CreateQuoteInput = t.TypeOf<typeof createQuoteInputDecoder>;
 
 export type GetFactsResponse = {
   assets: {
