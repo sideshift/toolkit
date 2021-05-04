@@ -80,3 +80,9 @@ export type GetPairResponse = {
   min: string | null;
   max: string | null;
 };
+
+export const setRefundAddressInputDecoder = t.type({
+  orderId: t.string,
+  address: t.string,
+  memo: t.union([t.string, t.undefined]),
+});
